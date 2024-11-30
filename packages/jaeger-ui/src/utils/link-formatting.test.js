@@ -27,6 +27,16 @@ describe('getParameterAndFormatter()', () => {
     );
   });
 
+  test('pad_start', () => {
+    const result = getParameterAndFormatter('traceID | pad_start 10 0');
+    expect(result).toEqual({
+      parameterName: 'traceID',
+      formatFunction: expect.any(Function),
+    });
+
+    expect(result.formatFunction('12345')).toEqual('0000012345');
+  });
+
   test('No function', () => {
     const result = getParameterAndFormatter('startTime');
     expect(result).toEqual({
